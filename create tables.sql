@@ -1,5 +1,24 @@
+CREATE TABLE `usuario` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `data_nasc` varchar(45) NOT NULL,
+  `sexo` varchar(45) NOT NULL,
+  `cpf` varchar(45) NOT NULL,
+  `foto` varchar(1000) DEFAULT NULL,
+  `data_inicio` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `plano` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `mensalidade` varchar(45) NOT NULL,
+  `descricao` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `aluno` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `lista_avaliacao` varchar(45) DEFAULT NULL,
   `id_plano` int DEFAULT NULL,
   `ativo` tinyint NOT NULL,
@@ -11,8 +30,18 @@ CREATE TABLE `aluno` (
   CONSTRAINT `id_usuario_aluno` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE `professor` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `CREF` varchar(45) NOT NULL,
+  `salario` varchar(45) NOT NULL,
+  `id_usuario` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_usuario_idx` (`id_usuario`),
+  CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `avaliacao` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `id_aluno` int NOT NULL,
   `id_professor` int NOT NULL,
   `data_avaliacao` varchar(45) NOT NULL,
@@ -26,7 +55,7 @@ CREATE TABLE `avaliacao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `exercicio` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
   `descricao` varchar(45) NOT NULL,
   `link_video` varchar(100) DEFAULT NULL,
@@ -34,8 +63,14 @@ CREATE TABLE `exercicio` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE `treino` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `grupamento` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `ficha_treino` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `id_aluno` int NOT NULL,
   `id_professor` int NOT NULL,
   `treino_a` int NOT NULL,
@@ -56,26 +91,8 @@ CREATE TABLE `ficha_treino` (
   CONSTRAINT `fk_ficha_treino_c` FOREIGN KEY (`treino_c`) REFERENCES `treino` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `plano` (
-  `id` int NOT NULL,
-  `nome` varchar(45) NOT NULL,
-  `mensalidade` varchar(45) NOT NULL,
-  `descricao` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-CREATE TABLE `professor` (
-  `id` int NOT NULL,
-  `CREF` varchar(45) NOT NULL,
-  `salario` varchar(45) NOT NULL,
-  `id_usuario` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_usuario_idx` (`id_usuario`),
-  CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 CREATE TABLE `rl_treino_exercico` (
-  `id_treino` int NOT NULL,
+  `id_treino` int NOT NULL AUTO_INCREMENT,
   `id_exercicio` int NOT NULL,
   `serie` varchar(45) NOT NULL,
   `repeticao` varchar(45) NOT NULL,
@@ -85,21 +102,4 @@ CREATE TABLE `rl_treino_exercico` (
   KEY `fk_exercicio_idx` (`id_exercicio`),
   CONSTRAINT `fk_exercicio` FOREIGN KEY (`id_exercicio`) REFERENCES `exercicio` (`id`),
   CONSTRAINT `fk_treino` FOREIGN KEY (`id_treino`) REFERENCES `treino` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-CREATE TABLE `treino` (
-  `id` int NOT NULL,
-  `grupamento` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-CREATE TABLE `usuario` (
-  `id` int NOT NULL,
-  `nome` varchar(45) NOT NULL,
-  `data_nasc` varchar(45) NOT NULL,
-  `sexo` varchar(45) NOT NULL,
-  `cpf` varchar(45) NOT NULL,
-  `foto` varchar(1000) DEFAULT NULL,
-  `data_inicio` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
