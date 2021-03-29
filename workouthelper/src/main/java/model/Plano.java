@@ -10,6 +10,8 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -17,6 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,6 +34,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Plano.findByNome", query = "SELECT p FROM Plano p WHERE p.nome = :nome"),
     @NamedQuery(name = "Plano.findByMensalidade", query = "SELECT p FROM Plano p WHERE p.mensalidade = :mensalidade"),
     @NamedQuery(name = "Plano.findByDescricao", query = "SELECT p FROM Plano p WHERE p.descricao = :descricao")})
+@XmlRootElement
 public class Plano implements Serializable {
 
     @Basic(optional = false)
@@ -50,9 +55,8 @@ public class Plano implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @OneToMany(mappedBy = "idPlano")
     private Collection<Aluno> alunoCollection;
@@ -80,6 +84,7 @@ public class Plano implements Serializable {
     }
 
 
+    @XmlTransient
     public Collection<Aluno> getAlunoCollection() {
         return alunoCollection;
     }

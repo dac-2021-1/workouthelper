@@ -6,7 +6,9 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,29 +16,28 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author marco
  */
 @Entity
-@Table(name = "aluno")
+@Table(name = "aluno", schema = "workouthelper")
 @NamedQueries({
     @NamedQuery(name = "Aluno.findAll", query = "SELECT a FROM Aluno a"),
     @NamedQuery(name = "Aluno.findById", query = "SELECT a FROM Aluno a WHERE a.id = :id"),
     @NamedQuery(name = "Aluno.findByListaAvaliacao", query = "SELECT a FROM Aluno a WHERE a.listaAvaliacao = :listaAvaliacao"),
     @NamedQuery(name = "Aluno.findByAtivo", query = "SELECT a FROM Aluno a WHERE a.ativo = :ativo")})
+@XmlRootElement
 public class Aluno implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
-    private Integer id;
     @Size(max = 45)
     @Column(name = "lista_avaliacao")
     private String listaAvaliacao;
@@ -44,11 +45,22 @@ public class Aluno implements Serializable {
     @NotNull
     @Column(name = "ativo")
     private short ativo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAluno")
+    private Collection<FichaTreino> fichaTreinoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAluno")
+    private Collection<Avaliacao> avaliacaoCollection;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id")
+    private Integer id;
     @JoinColumn(name = "id_plano", referencedColumnName = "id")
     @ManyToOne
     private Plano idPlano;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @OneToOne
     private Usuario idUsuario;
 
     public Aluno() {
@@ -77,14 +89,6 @@ public class Aluno implements Serializable {
 
     public void setListaAvaliacao(String listaAvaliacao) {
         this.listaAvaliacao = listaAvaliacao;
-    }
-
-    public short getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(short ativo) {
-        this.ativo = ativo;
     }
 
     public Plano getIdPlano() {
@@ -127,5 +131,31 @@ public class Aluno implements Serializable {
     public String toString() {
         return "model.Aluno[ id=" + id + " ]";
     }
-    
+
+    @XmlTransient
+    public Collection<FichaTreino> getFichaTreinoCollection() {
+        return fichaTreinoCollection;
+    }
+
+    public void setFichaTreinoCollection(Collection<FichaTreino> fichaTreinoCollection) {
+        this.fichaTreinoCollection = fichaTreinoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Avaliacao> getAvaliacaoCollection() {
+        return avaliacaoCollection;
+    }
+
+    public void setAvaliacaoCollection(Collection<Avaliacao> avaliacaoCollection) {
+        this.avaliacaoCollection = avaliacaoCollection;
+    }
+
+    public short getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(short ativo) {
+        this.ativo = ativo;
+    }
+
 }

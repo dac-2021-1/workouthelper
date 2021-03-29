@@ -11,15 +11,18 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -36,6 +39,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Usuario.findByCpf", query = "SELECT u FROM Usuario u WHERE u.cpf = :cpf"),
     @NamedQuery(name = "Usuario.findByFoto", query = "SELECT u FROM Usuario u WHERE u.foto = :foto"),
     @NamedQuery(name = "Usuario.findByDataInicio", query = "SELECT u FROM Usuario u WHERE u.dataInicio = :dataInicio")})
+@XmlRootElement
 public class Usuario implements Serializable {
 
     @Basic(optional = false)
@@ -69,13 +73,12 @@ public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "aluno")
     private Collection<Aluno> alunoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "professor")
     private Collection<Professor> professorCollection;
 
     public Usuario() {
@@ -102,7 +105,6 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-
     public String getDataNasc() {
         return dataNasc;
     }
@@ -110,7 +112,6 @@ public class Usuario implements Serializable {
     public void setDataNasc(String dataNasc) {
         this.dataNasc = dataNasc;
     }
-
 
     public String getDataInicio() {
         return dataInicio;
@@ -168,6 +169,7 @@ public class Usuario implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public String getSexo() {
         return sexo;
     }
@@ -191,5 +193,5 @@ public class Usuario implements Serializable {
     public void setFoto(String foto) {
         this.foto = foto;
     }
-    
+
 }

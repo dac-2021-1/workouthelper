@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -30,14 +33,9 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Avaliacao.findByDataAvaliacao", query = "SELECT a FROM Avaliacao a WHERE a.dataAvaliacao = :dataAvaliacao"),
     @NamedQuery(name = "Avaliacao.findByMedidas", query = "SELECT a FROM Avaliacao a WHERE a.medidas = :medidas"),
     @NamedQuery(name = "Avaliacao.findByPeso", query = "SELECT a FROM Avaliacao a WHERE a.peso = :peso")})
+@XmlRootElement
 public class Avaliacao implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -53,6 +51,12 @@ public class Avaliacao implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "peso")
     private String peso;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @JoinColumn(name = "id_aluno", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Aluno idAluno;
@@ -88,22 +92,6 @@ public class Avaliacao implements Serializable {
 
     public void setDataAvaliacao(String dataAvaliacao) {
         this.dataAvaliacao = dataAvaliacao;
-    }
-
-    public String getMedidas() {
-        return medidas;
-    }
-
-    public void setMedidas(String medidas) {
-        this.medidas = medidas;
-    }
-
-    public String getPeso() {
-        return peso;
-    }
-
-    public void setPeso(String peso) {
-        this.peso = peso;
     }
 
     public Aluno getIdAluno() {
@@ -146,5 +134,21 @@ public class Avaliacao implements Serializable {
     public String toString() {
         return "model.Avaliacao[ id=" + id + " ]";
     }
-    
+
+    public String getMedidas() {
+        return medidas;
+    }
+
+    public void setMedidas(String medidas) {
+        this.medidas = medidas;
+    }
+
+    public String getPeso() {
+        return peso;
+    }
+
+    public void setPeso(String peso) {
+        this.peso = peso;
+    }
+
 }

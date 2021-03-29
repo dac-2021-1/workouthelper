@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -29,14 +32,9 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "FichaTreino.findById", query = "SELECT f FROM FichaTreino f WHERE f.id = :id"),
     @NamedQuery(name = "FichaTreino.findByDataInicio", query = "SELECT f FROM FichaTreino f WHERE f.dataInicio = :dataInicio"),
     @NamedQuery(name = "FichaTreino.findByDataFinal", query = "SELECT f FROM FichaTreino f WHERE f.dataFinal = :dataFinal")})
+@XmlRootElement
 public class FichaTreino implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -47,6 +45,12 @@ public class FichaTreino implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "data_final")
     private String dataFinal;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @JoinColumn(name = "id_aluno", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Aluno idAluno;
@@ -164,5 +168,5 @@ public class FichaTreino implements Serializable {
     public String toString() {
         return "model.FichaTreino[ id=" + id + " ]";
     }
-    
+
 }

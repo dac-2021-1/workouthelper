@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -18,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,19 +33,20 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Treino.findAll", query = "SELECT t FROM Treino t"),
     @NamedQuery(name = "Treino.findById", query = "SELECT t FROM Treino t WHERE t.id = :id"),
     @NamedQuery(name = "Treino.findByGrupamento", query = "SELECT t FROM Treino t WHERE t.grupamento = :grupamento")})
+@XmlRootElement
 public class Treino implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "grupamento")
     private String grupamento;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "treinoA")
     private Collection<FichaTreino> fichaTreinoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "treinoB")
@@ -71,14 +76,8 @@ public class Treino implements Serializable {
         this.id = id;
     }
 
-    public String getGrupamento() {
-        return grupamento;
-    }
 
-    public void setGrupamento(String grupamento) {
-        this.grupamento = grupamento;
-    }
-
+    @XmlTransient
     public Collection<FichaTreino> getFichaTreinoCollection() {
         return fichaTreinoCollection;
     }
@@ -87,6 +86,7 @@ public class Treino implements Serializable {
         this.fichaTreinoCollection = fichaTreinoCollection;
     }
 
+    @XmlTransient
     public Collection<FichaTreino> getFichaTreinoCollection1() {
         return fichaTreinoCollection1;
     }
@@ -95,6 +95,7 @@ public class Treino implements Serializable {
         this.fichaTreinoCollection1 = fichaTreinoCollection1;
     }
 
+    @XmlTransient
     public Collection<FichaTreino> getFichaTreinoCollection2() {
         return fichaTreinoCollection2;
     }
@@ -103,6 +104,7 @@ public class Treino implements Serializable {
         this.fichaTreinoCollection2 = fichaTreinoCollection2;
     }
 
+    @XmlTransient
     public Collection<RlTreinoExercico> getRlTreinoExercicoCollection() {
         return rlTreinoExercicoCollection;
     }
@@ -134,6 +136,14 @@ public class Treino implements Serializable {
     @Override
     public String toString() {
         return "model.Treino[ id=" + id + " ]";
+    }
+
+    public String getGrupamento() {
+        return grupamento;
+    }
+
+    public void setGrupamento(String grupamento) {
+        this.grupamento = grupamento;
     }
     
 }

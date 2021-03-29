@@ -17,6 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -32,11 +33,9 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "RlTreinoExercico.findByRepeticao", query = "SELECT r FROM RlTreinoExercico r WHERE r.repeticao = :repeticao"),
     @NamedQuery(name = "RlTreinoExercico.findByIntervalo", query = "SELECT r FROM RlTreinoExercico r WHERE r.intervalo = :intervalo"),
     @NamedQuery(name = "RlTreinoExercico.findByRow", query = "SELECT r FROM RlTreinoExercico r WHERE r.row = :row")})
+@XmlRootElement
 public class RlTreinoExercico implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected RlTreinoExercicoPK rlTreinoExercicoPK;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -57,6 +56,10 @@ public class RlTreinoExercico implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "row")
     private String row;
+
+    private static final long serialVersionUID = 1L;
+    @EmbeddedId
+    protected RlTreinoExercicoPK rlTreinoExercicoPK;
     @JoinColumn(name = "id_exercicio", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Exercicio exercicio;
@@ -87,37 +90,6 @@ public class RlTreinoExercico implements Serializable {
         this.rlTreinoExercicoPK = rlTreinoExercicoPK;
     }
 
-    public String getSerie() {
-        return serie;
-    }
-
-    public void setSerie(String serie) {
-        this.serie = serie;
-    }
-
-    public String getRepeticao() {
-        return repeticao;
-    }
-
-    public void setRepeticao(String repeticao) {
-        this.repeticao = repeticao;
-    }
-
-    public String getIntervalo() {
-        return intervalo;
-    }
-
-    public void setIntervalo(String intervalo) {
-        this.intervalo = intervalo;
-    }
-
-    public String getRow() {
-        return row;
-    }
-
-    public void setRow(String row) {
-        this.row = row;
-    }
 
     public Exercicio getExercicio() {
         return exercicio;
@@ -158,6 +130,38 @@ public class RlTreinoExercico implements Serializable {
     @Override
     public String toString() {
         return "model.RlTreinoExercico[ rlTreinoExercicoPK=" + rlTreinoExercicoPK + " ]";
+    }
+
+    public String getSerie() {
+        return serie;
+    }
+
+    public void setSerie(String serie) {
+        this.serie = serie;
+    }
+
+    public String getRepeticao() {
+        return repeticao;
+    }
+
+    public void setRepeticao(String repeticao) {
+        this.repeticao = repeticao;
+    }
+
+    public String getIntervalo() {
+        return intervalo;
+    }
+
+    public void setIntervalo(String intervalo) {
+        this.intervalo = intervalo;
+    }
+
+    public String getRow() {
+        return row;
+    }
+
+    public void setRow(String row) {
+        this.row = row;
     }
     
 }

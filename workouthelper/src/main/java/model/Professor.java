@@ -6,17 +6,25 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,14 +37,9 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Professor.findById", query = "SELECT p FROM Professor p WHERE p.id = :id"),
     @NamedQuery(name = "Professor.findByCref", query = "SELECT p FROM Professor p WHERE p.cref = :cref"),
     @NamedQuery(name = "Professor.findBySalario", query = "SELECT p FROM Professor p WHERE p.salario = :salario")})
+@XmlRootElement
 public class Professor implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -47,8 +50,18 @@ public class Professor implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "salario")
     private String salario;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProfessor")
+    private Collection<FichaTreino> fichaTreinoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProfessor")
+    private Collection<Avaliacao> avaliacaoCollection;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @OneToOne
     private Usuario idUsuario;
 
     public Professor() {
@@ -72,21 +85,6 @@ public class Professor implements Serializable {
         this.id = id;
     }
 
-    public String getCref() {
-        return cref;
-    }
-
-    public void setCref(String cref) {
-        this.cref = cref;
-    }
-
-    public String getSalario() {
-        return salario;
-    }
-
-    public void setSalario(String salario) {
-        this.salario = salario;
-    }
 
     public Usuario getIdUsuario() {
         return idUsuario;
@@ -119,6 +117,41 @@ public class Professor implements Serializable {
     @Override
     public String toString() {
         return "model.Professor[ id=" + id + " ]";
+    }
+
+
+    @XmlTransient
+    public Collection<FichaTreino> getFichaTreinoCollection() {
+        return fichaTreinoCollection;
+    }
+
+    public void setFichaTreinoCollection(Collection<FichaTreino> fichaTreinoCollection) {
+        this.fichaTreinoCollection = fichaTreinoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Avaliacao> getAvaliacaoCollection() {
+        return avaliacaoCollection;
+    }
+
+    public void setAvaliacaoCollection(Collection<Avaliacao> avaliacaoCollection) {
+        this.avaliacaoCollection = avaliacaoCollection;
+    }
+
+    public String getCref() {
+        return cref;
+    }
+
+    public void setCref(String cref) {
+        this.cref = cref;
+    }
+
+    public String getSalario() {
+        return salario;
+    }
+
+    public void setSalario(String salario) {
+        this.salario = salario;
     }
     
 }
