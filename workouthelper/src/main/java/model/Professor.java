@@ -5,8 +5,13 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +25,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -50,10 +56,10 @@ public class Professor implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "salario")
     private String salario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProfessor")
-    private Collection<FichaTreino> fichaTreinoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProfessor")
-    private Collection<Avaliacao> avaliacaoCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProfessor")
+//    private Collection<FichaTreino> fichaTreinoCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProfessor")
+//    private Collection<Avaliacao> avaliacaoCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -61,8 +67,9 @@ public class Professor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
-    @OneToOne
-    private Usuario idUsuario;
+    @OneToOne(optional = true)
+    @JsonbTransient
+    private Usuario usuario;
 
     public Professor() {
     }
@@ -85,13 +92,12 @@ public class Professor implements Serializable {
         this.id = id;
     }
 
-
-    public Usuario getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -120,23 +126,23 @@ public class Professor implements Serializable {
     }
 
 
-    @XmlTransient
-    public Collection<FichaTreino> getFichaTreinoCollection() {
-        return fichaTreinoCollection;
-    }
-
-    public void setFichaTreinoCollection(Collection<FichaTreino> fichaTreinoCollection) {
-        this.fichaTreinoCollection = fichaTreinoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Avaliacao> getAvaliacaoCollection() {
-        return avaliacaoCollection;
-    }
-
-    public void setAvaliacaoCollection(Collection<Avaliacao> avaliacaoCollection) {
-        this.avaliacaoCollection = avaliacaoCollection;
-    }
+//    @XmlTransient
+//    public Collection<FichaTreino> getFichaTreinoCollection() {
+//        return fichaTreinoCollection;
+//    }
+//
+//    public void setFichaTreinoCollection(Collection<FichaTreino> fichaTreinoCollection) {
+//        this.fichaTreinoCollection = fichaTreinoCollection;
+//    }
+//
+//    @XmlTransient
+//    public Collection<Avaliacao> getAvaliacaoCollection() {
+//        return avaliacaoCollection;
+//    }
+//
+//    public void setAvaliacaoCollection(Collection<Avaliacao> avaliacaoCollection) {
+//        this.avaliacaoCollection = avaliacaoCollection;
+//    }
 
     public String getCref() {
         return cref;

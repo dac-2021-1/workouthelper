@@ -61,8 +61,8 @@ public class Exercicio implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "exercicio")
-    private Collection<RlTreinoExercico> rlTreinoExercicoCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "exercicio")
+//    private Collection<RlTreinoExercico> rlTreinoExercicoCollection;
 
     public Exercicio() {
     }
@@ -93,14 +93,14 @@ public class Exercicio implements Serializable {
         this.linkVideo = linkVideo;
     }
 
-    @XmlTransient
-    public Collection<RlTreinoExercico> getRlTreinoExercicoCollection() {
-        return rlTreinoExercicoCollection;
-    }
-
-    public void setRlTreinoExercicoCollection(Collection<RlTreinoExercico> rlTreinoExercicoCollection) {
-        this.rlTreinoExercicoCollection = rlTreinoExercicoCollection;
-    }
+//    @XmlTransient
+//    public Collection<RlTreinoExercico> getRlTreinoExercicoCollection() {
+//        return rlTreinoExercicoCollection;
+//    }
+//
+//    public void setRlTreinoExercicoCollection(Collection<RlTreinoExercico> rlTreinoExercicoCollection) {
+//        this.rlTreinoExercicoCollection = rlTreinoExercicoCollection;
+//    }
 
     @Override
     public int hashCode() {

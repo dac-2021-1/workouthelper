@@ -14,6 +14,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -29,7 +30,33 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
-    public void create(T entity) {
+    public Response create(T entity) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = (Validator) factory.getValidator();
+        Set<ConstraintViolation<T>> constraintViolations = validator.validate(entity);
+        if (constraintViolations.size() > 0) {
+            Iterator<ConstraintViolation<T>> iterator = constraintViolations.iterator();
+            while (iterator.hasNext()) {
+                ConstraintViolation<T> cv = iterator.next();
+                System.err.println(cv.getRootBeanClass().getName() + "." + cv.getPropertyPath() + " " + cv.getMessage());
+            }
+            return Response.serverError().build();
+        } else {
+            Map print = getEntityManager().getProperties();
+            for (Iterator it = print.entrySet().iterator(); it.hasNext();) {
+                Object entry = it.next();
+                System.out.println(entry);
+            }
+            try {
+                getEntityManager().persist(entity);
+                return Response.ok(entity).build();
+            } catch (Exception e) {
+                return Response.serverError().build();
+            }
+        }
+    }
+    
+    public void createUser(T entity) {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = (Validator) factory.getValidator();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(entity);
@@ -45,16 +72,29 @@ public abstract class AbstractFacade<T> {
                 Object entry = it.next();
                 System.out.println(entry);
             }
-            getEntityManager().persist(entity);
+            try {
+                getEntityManager().persist(entity);
+            } catch (Exception e) {
+            }
         }
     }
 
-    public void edit(T entity) {
-        getEntityManager().merge(entity);
+    public Response edit(T entity) {
+        try {
+            getEntityManager().merge(entity);
+            return Response.ok(entity).build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
     }
 
-    public void remove(T entity) {
-        getEntityManager().remove(getEntityManager().merge(entity));
+    public Response remove(T entity) {
+        try {
+            getEntityManager().remove(getEntityManager().merge(entity));
+            return Response.ok(entity).build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
     }
 
     public T find(Object id) {

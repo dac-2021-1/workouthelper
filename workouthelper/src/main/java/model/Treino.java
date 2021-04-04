@@ -5,6 +5,8 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -47,14 +49,14 @@ public class Treino implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "treinoA")
-    private Collection<FichaTreino> fichaTreinoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "treinoB")
-    private Collection<FichaTreino> fichaTreinoCollection1;
-    @OneToMany(mappedBy = "treinoC")
-    private Collection<FichaTreino> fichaTreinoCollection2;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "treino")
-    private Collection<RlTreinoExercico> rlTreinoExercicoCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "treinoA")
+//    private Collection<FichaTreino> fichaTreinoCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "treinoB")
+//    private Collection<FichaTreino> fichaTreinoCollection1;
+//    @OneToMany(mappedBy = "treinoC")
+//    private Collection<FichaTreino> fichaTreinoCollection2;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "treino")
+//    private Collection<RlTreinoExercico> rlTreinoExercicoCollection;
 
     public Treino() {
     }
@@ -77,41 +79,41 @@ public class Treino implements Serializable {
     }
 
 
-    @XmlTransient
-    public Collection<FichaTreino> getFichaTreinoCollection() {
-        return fichaTreinoCollection;
-    }
-
-    public void setFichaTreinoCollection(Collection<FichaTreino> fichaTreinoCollection) {
-        this.fichaTreinoCollection = fichaTreinoCollection;
-    }
-
-    @XmlTransient
-    public Collection<FichaTreino> getFichaTreinoCollection1() {
-        return fichaTreinoCollection1;
-    }
-
-    public void setFichaTreinoCollection1(Collection<FichaTreino> fichaTreinoCollection1) {
-        this.fichaTreinoCollection1 = fichaTreinoCollection1;
-    }
-
-    @XmlTransient
-    public Collection<FichaTreino> getFichaTreinoCollection2() {
-        return fichaTreinoCollection2;
-    }
-
-    public void setFichaTreinoCollection2(Collection<FichaTreino> fichaTreinoCollection2) {
-        this.fichaTreinoCollection2 = fichaTreinoCollection2;
-    }
-
-    @XmlTransient
-    public Collection<RlTreinoExercico> getRlTreinoExercicoCollection() {
-        return rlTreinoExercicoCollection;
-    }
-
-    public void setRlTreinoExercicoCollection(Collection<RlTreinoExercico> rlTreinoExercicoCollection) {
-        this.rlTreinoExercicoCollection = rlTreinoExercicoCollection;
-    }
+//    @XmlTransient
+//    public Collection<FichaTreino> getFichaTreinoCollection() {
+//        return fichaTreinoCollection;
+//    }
+//
+//    public void setFichaTreinoCollection(Collection<FichaTreino> fichaTreinoCollection) {
+//        this.fichaTreinoCollection = fichaTreinoCollection;
+//    }
+//
+//    @XmlTransient
+//    public Collection<FichaTreino> getFichaTreinoCollection1() {
+//        return fichaTreinoCollection1;
+//    }
+//
+//    public void setFichaTreinoCollection1(Collection<FichaTreino> fichaTreinoCollection1) {
+//        this.fichaTreinoCollection1 = fichaTreinoCollection1;
+//    }
+//
+//    @XmlTransient
+//    public Collection<FichaTreino> getFichaTreinoCollection2() {
+//        return fichaTreinoCollection2;
+//    }
+//
+//    public void setFichaTreinoCollection2(Collection<FichaTreino> fichaTreinoCollection2) {
+//        this.fichaTreinoCollection2 = fichaTreinoCollection2;
+//    }
+//
+//    @XmlTransient
+//    public Collection<RlTreinoExercico> getRlTreinoExercicoCollection() {
+//        return rlTreinoExercicoCollection;
+//    }
+//
+//    public void setRlTreinoExercicoCollection(Collection<RlTreinoExercico> rlTreinoExercicoCollection) {
+//        this.rlTreinoExercicoCollection = rlTreinoExercicoCollection;
+//    }
 
     @Override
     public int hashCode() {

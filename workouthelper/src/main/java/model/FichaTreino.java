@@ -5,7 +5,11 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -53,18 +57,23 @@ public class FichaTreino implements Serializable {
     private Integer id;
     @JoinColumn(name = "id_aluno", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore 
     private Aluno idAluno;
     @JoinColumn(name = "id_professor", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore 
     private Professor idProfessor;
     @JoinColumn(name = "treino_a", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore 
     private Treino treinoA;
     @JoinColumn(name = "treino_b", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore 
     private Treino treinoB;
     @JoinColumn(name = "treino_c", referencedColumnName = "id")
     @ManyToOne
+    @JsonIgnore 
     private Treino treinoC;
 
     public FichaTreino() {

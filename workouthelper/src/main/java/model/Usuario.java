@@ -19,6 +19,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -76,10 +77,10 @@ public class Usuario implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "aluno")
-    private Collection<Aluno> alunoCollection;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "professor")
-    private Collection<Professor> professorCollection;
+    @OneToOne(mappedBy = "usuario", optional = true)
+    private Aluno aluno;
+    @OneToOne(mappedBy = "usuario", optional = true)
+    private Professor professor;
 
     public Usuario() {
     }
@@ -121,20 +122,20 @@ public class Usuario implements Serializable {
         this.dataInicio = dataInicio;
     }
 
-    public Collection<Aluno> getAlunoCollection() {
-        return alunoCollection;
+    public Aluno getAluno() {
+        return aluno;
     }
 
-    public void setAlunoCollection(Collection<Aluno> alunoCollection) {
-        this.alunoCollection = alunoCollection;
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 
-    public Collection<Professor> getProfessorCollection() {
-        return professorCollection;
+    public Professor getProfessor() {
+        return professor;
     }
 
-    public void setProfessorCollection(Collection<Professor> professorCollection) {
-        this.professorCollection = professorCollection;
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
     @Override

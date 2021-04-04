@@ -19,6 +19,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
+import javax.ws.rs.core.Response;
 import model.RlTreinoExercico;
 import model.RlTreinoExercicoPK;
 
@@ -61,27 +62,36 @@ public class RlTreinoExercicoFacadeREST extends AbstractFacade<RlTreinoExercico>
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(RlTreinoExercico entity) {
-        super.create(entity);
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response create(RlTreinoExercico entity) {
+        if (entity.getRlTreinoExercicoPK() == null) {
+            RlTreinoExercicoPK pk = new RlTreinoExercicoPK();
+            pk.setIdTreino(entity.getTreino().getId());
+            pk.setIdExercicio(entity.getExercicio().getId());
+            entity.setRlTreinoExercicoPK(pk);
+        }
+        return super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") PathSegment id, RlTreinoExercico entity) {
-        super.edit(entity);
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response edit(@PathParam("id") PathSegment id, RlTreinoExercico entity) {
+        return super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") PathSegment id) {
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response remove(@PathParam("id") PathSegment id) {
         model.RlTreinoExercicoPK key = getPrimaryKey(id);
-        super.remove(super.find(key));
+        return super.remove(super.find(key));
     }
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public RlTreinoExercico find(@PathParam("id") PathSegment id) {
         model.RlTreinoExercicoPK key = getPrimaryKey(id);
         return super.find(key);
@@ -89,14 +99,14 @@ public class RlTreinoExercicoFacadeREST extends AbstractFacade<RlTreinoExercico>
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<RlTreinoExercico> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<RlTreinoExercico> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
@@ -112,5 +122,5 @@ public class RlTreinoExercicoFacadeREST extends AbstractFacade<RlTreinoExercico>
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

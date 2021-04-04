@@ -5,12 +5,20 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +26,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Aluno.findAll", query = "SELECT a FROM Aluno a"),
     @NamedQuery(name = "Aluno.findById", query = "SELECT a FROM Aluno a WHERE a.id = :id"),
-    @NamedQuery(name = "Aluno.findByListaAvaliacao", query = "SELECT a FROM Aluno a WHERE a.listaAvaliacao = :listaAvaliacao"),
+//    @NamedQuery(name = "Aluno.findByListaAvaliacao", query = "SELECT a FROM Aluno a WHERE a.listaAvaliacao = :listaAvaliacao"),
     @NamedQuery(name = "Aluno.findByAtivo", query = "SELECT a FROM Aluno a WHERE a.ativo = :ativo")})
 @XmlRootElement
 public class Aluno implements Serializable {
@@ -45,23 +54,23 @@ public class Aluno implements Serializable {
     @NotNull
     @Column(name = "ativo")
     private short ativo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAluno")
-    private Collection<FichaTreino> fichaTreinoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAluno")
-    private Collection<Avaliacao> avaliacaoCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAluno")
+//    private Collection<FichaTreino> fichaTreinoCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAluno")
+//    private Collection<Avaliacao> avaliacaoCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @JoinColumn(name = "id_plano", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Plano idPlano;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
-    @OneToOne
-    private Usuario idUsuario;
+    @OneToOne(optional = true)
+    private Usuario usuario;
 
     public Aluno() {
     }
@@ -99,12 +108,12 @@ public class Aluno implements Serializable {
         this.idPlano = idPlano;
     }
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -132,23 +141,23 @@ public class Aluno implements Serializable {
         return "model.Aluno[ id=" + id + " ]";
     }
 
-    @XmlTransient
-    public Collection<FichaTreino> getFichaTreinoCollection() {
-        return fichaTreinoCollection;
-    }
+//    @XmlTransient
+//    public Collection<FichaTreino> getFichaTreinoCollection() {
+//        return fichaTreinoCollection;
+//    }
+//
+//    public void setFichaTreinoCollection(Collection<FichaTreino> fichaTreinoCollection) {
+//        this.fichaTreinoCollection = fichaTreinoCollection;
+//    }
 
-    public void setFichaTreinoCollection(Collection<FichaTreino> fichaTreinoCollection) {
-        this.fichaTreinoCollection = fichaTreinoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Avaliacao> getAvaliacaoCollection() {
-        return avaliacaoCollection;
-    }
-
-    public void setAvaliacaoCollection(Collection<Avaliacao> avaliacaoCollection) {
-        this.avaliacaoCollection = avaliacaoCollection;
-    }
+//    @XmlTransient
+//    public Collection<Avaliacao> getAvaliacaoCollection() {
+//        return avaliacaoCollection;
+//    }
+//
+//    public void setAvaliacaoCollection(Collection<Avaliacao> avaliacaoCollection) {
+//        this.avaliacaoCollection = avaliacaoCollection;
+//    }
 
     public short getAtivo() {
         return ativo;

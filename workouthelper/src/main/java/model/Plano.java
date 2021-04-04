@@ -5,6 +5,8 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -58,8 +60,8 @@ public class Plano implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToMany(mappedBy = "idPlano")
-    private Collection<Aluno> alunoCollection;
+//    @OneToMany(mappedBy = "idPlano")
+//    private Collection<Aluno> alunoCollection;
 
     public Plano() {
     }
@@ -84,14 +86,14 @@ public class Plano implements Serializable {
     }
 
 
-    @XmlTransient
-    public Collection<Aluno> getAlunoCollection() {
-        return alunoCollection;
-    }
-
-    public void setAlunoCollection(Collection<Aluno> alunoCollection) {
-        this.alunoCollection = alunoCollection;
-    }
+//    @XmlTransient
+//    public Collection<Aluno> getAlunoCollection() {
+//        return alunoCollection;
+//    }
+//
+//    public void setAlunoCollection(Collection<Aluno> alunoCollection) {
+//        this.alunoCollection = alunoCollection;
+//    }
 
     @Override
     public int hashCode() {
