@@ -5,6 +5,8 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -21,6 +23,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -39,6 +42,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findBySexo", query = "SELECT u FROM Usuario u WHERE u.sexo = :sexo"),
     @NamedQuery(name = "Usuario.findByCpf", query = "SELECT u FROM Usuario u WHERE u.cpf = :cpf"),
     @NamedQuery(name = "Usuario.findByFoto", query = "SELECT u FROM Usuario u WHERE u.foto = :foto"),
+    @NamedQuery(name = "Usuario.login", query = "SELECT u FROM Usuario u where u.cpf = :cpf AND u.senha = :senha"),
     @NamedQuery(name = "Usuario.findByDataInicio", query = "SELECT u FROM Usuario u WHERE u.dataInicio = :dataInicio")})
 @XmlRootElement
 public class Usuario implements Serializable {
@@ -71,6 +75,11 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "data_inicio")
     private String dataInicio;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "senha")
+    private String senha;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -89,6 +98,11 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
+    public Usuario(Integer id, String senha) {
+        this.id = id;
+        this.senha = senha;
+    }
+
     public Usuario(Integer id, String nome, String dataNasc, String sexo, String cpf, String dataInicio) {
         this.id = id;
         this.nome = nome;
@@ -96,6 +110,21 @@ public class Usuario implements Serializable {
         this.sexo = sexo;
         this.cpf = cpf;
         this.dataInicio = dataInicio;
+    }
+
+    public Usuario(Integer id, String nome, String dataNasc, String sexo, String cpf, String dataInicio, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNasc = dataNasc;
+        this.sexo = sexo;
+        this.cpf = cpf;
+        this.dataInicio = dataInicio;
+        this.senha = senha;
+    }
+
+    public Usuario(String cpf, String senha) {
+        this.cpf = cpf;
+        this.senha = senha;
     }
 
     public Integer getId() {
@@ -195,4 +224,11 @@ public class Usuario implements Serializable {
         this.foto = foto;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 }

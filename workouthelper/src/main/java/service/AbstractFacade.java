@@ -55,7 +55,7 @@ public abstract class AbstractFacade<T> {
             }
         }
     }
-    
+
     public void createUser(T entity) {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = (Validator) factory.getValidator();
@@ -80,11 +80,23 @@ public abstract class AbstractFacade<T> {
     }
 
     public Response edit(T entity) {
-        try {
-            getEntityManager().merge(entity);
-            return Response.ok(entity).build();
-        } catch (Exception e) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = (Validator) factory.getValidator();
+        Set<ConstraintViolation<T>> constraintViolations = validator.validate(entity);
+        if (constraintViolations.size() > 0) {
+            Iterator<ConstraintViolation<T>> iterator = constraintViolations.iterator();
+            while (iterator.hasNext()) {
+                ConstraintViolation<T> cv = iterator.next();
+                System.err.println(cv.getRootBeanClass().getName() + "." + cv.getPropertyPath() + " " + cv.getMessage());
+            }
             return Response.serverError().build();
+        } else {
+            try {
+                getEntityManager().merge(entity);
+                return Response.ok(entity).build();
+            } catch (Exception e) {
+                return Response.serverError().build();
+            }
         }
     }
 

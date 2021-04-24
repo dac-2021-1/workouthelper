@@ -66,8 +66,20 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public Response edit(@PathParam("id") Integer id, Usuario entity) {
+        Usuario u = em.createNamedQuery("Usuario.findById", Usuario.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+
+        entity.setCpf(u.getCpf());
+        entity.setDataInicio(u.getDataInicio());
+        entity.setId(id);
+        entity.setNome(u.getNome());
+        entity.setSexo(u.getSexo());
+        entity.setDataNasc(u.getDataNasc());
+
         return super.edit(entity);
     }
 

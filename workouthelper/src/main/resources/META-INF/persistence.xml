@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.2" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-        
-    <!-- Define Persistence Unit -->
-        
-    <persistence-unit name="my_persistence_unit">
-                
-        <class>model.Usuario</class>
-                
-        <class>model.Plano</class>
-                
-        <class>model.Exercicio</class>
-                
-        <class>model.Avaliacao</class>
-                
-        <class>model.RlTreinoExercico</class>
-                
-        <class>model.Aluno</class>
-                
-        <class>model.Professor</class>
-                
-        <class>model.FichaTreino</class>
-                
-        <class>model.Treino</class>
-                
-        <jta-data-source>workouthelper_jndi</jta-data-source>
             
-    </persistence-unit>
     
+    <!-- Define Persistence Unit -->
+            
+    
+    <persistence-unit name="my_persistence_unit">
+                        
+        
+        <class>model.Usuario</class>
+                        
+        
+        <class>model.Plano</class>
+                        
+        
+        <class>model.Exercicio</class>
+                        
+        
+        <class>model.Avaliacao</class>
+                        
+        
+        <class>model.RlTreinoExercico</class>
+                        
+        
+        <class>model.Aluno</class>
+                        
+        
+        <class>model.Professor</class>
+                        
+        
+        <class>model.FichaTreino</class>
+                        
+        
+        <class>model.Treino</class>
+                        
+        
+        <jta-data-source>workouthelper_jndi</jta-data-source>
+                    
+    
+    </persistence-unit>
+        
+
 </persistence>
