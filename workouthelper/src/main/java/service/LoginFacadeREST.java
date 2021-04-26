@@ -55,6 +55,9 @@ public class LoginFacadeREST extends AbstractFacade<Usuario> {
                 jo.put("name", u.getNome());
                 jo.put("id", u.getId());
                 jo.put("token", jwtToken);
+                if(u.getAluno() != null) jo.put("isAluno", true);
+                else jo.put("isAluno", false);
+                
                 return Response.status(Response.Status.OK).entity(jo.toString()).build();
             } else {
                 return Response.status(Response.Status.UNAUTHORIZED)
