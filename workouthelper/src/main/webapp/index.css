@@ -1,0 +1,447 @@
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+h2{
+  margin-top: 48px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 140%;
+  color: #000000;
+  margin-bottom: 19px;
+}
+.box-login{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+}
+.box-login .logotipo-preta{
+  text-align: center;
+  margin-bottom: 50px;
+}
+.logotipo-preta{
+  color: #000;
+  font-size: 30px;
+  line-height: 100%;
+}
+.logotipo-preta strong{
+  color: #132356;
+  display: block;
+}
+.login-form{
+  max-width: 400px;
+  width: 100%;
+  margin: auto;
+}
+.login-form .btn-login{
+  display: inline-block;
+  width: 100%;
+  padding: 18px 0px;
+  background-color: #132356;
+  color: #fff;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  border: 0px;
+  line-height: 140%;
+  margin-top: 20px;
+  transition: 0.2s;
+  border-radius: 16px;
+}
+.login-form .btn-login:hover{
+  transition: 0.2s;
+  opacity: 0.8;
+}
+.login-form input{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 140%;
+  color: #000000;
+  border: 0px;
+  padding-bottom: 14px;
+  padding-top: 14px;
+  margin-bottom: 40px;
+  border-radius: 0px;
+  border-bottom: 1px solid rgba(0,0,0,.3);
+}
+
+
+.menu-navegacao-index{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.menu-navegacao-index a{
+  color: #132356;
+}
+.home-logotipo{
+  padding-top: 60px;
+}
+.box-treino-de-hoje{
+  background-color: #132356;
+  padding: 40px 42px;
+  border-radius: 20px;
+}
+.secao-treino-inicio a{
+  text-decoration: none;
+  cursor: pointer;
+}
+.box-treino-de-hoje .row{
+  display: flex;
+  align-items: center;
+}
+.box-treino-de-hoje .date-box-treino{
+  background-color: #ebbe31;
+  color: #fff;
+  text-align: center;
+  padding: 12px 0px;
+  border-radius: 14px;
+}
+.box-treino-de-hoje .valor-dia{
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 140%;
+}
+.box-treino-de-hoje .valor-mes{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 140%;
+}
+.box-treino-de-hoje .texto-infos-box-treino h4{
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 140%;
+  color: #FFFFFF;
+  margin-top: 0px;
+  margin-bottom: 4px;
+}
+.box-treino-de-hoje .texto-infos-box-treino h5{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+  color: #FFFFFF;
+  margin: 0px;
+}
+
+.prox-treinos-lista{
+  padding-bottom: 60px;
+}
+.prox-treinos-lista h3{
+  margin-top: 25px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 140%;
+  color: #000000;
+  margin-bottom: 24px;
+}
+.prox-treinos-lista ul{
+  list-style: none;
+  padding-left: 0px;
+}
+.prox-treinos-lista a{
+  cursor: pointer;
+  transition: 0.2s;
+  text-decoration: none;
+}
+.prox-treinos-lista a:hover li{
+  transition: 0.2s;
+  box-shadow: 0px 4px 15px rgb(0 0 0 / 16%);
+}
+.prox-treinos-lista li{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  padding: 15px;
+  border-radius: 15px;
+  transition: 0.2s;
+}
+.prox-treinos-lista .date-box-treino{
+  background-color: #ebbe31;
+  color: #fff;
+  text-align: center;
+  padding: 12px 0px;
+  border-radius: 14px;
+  width: 72px;
+}
+.prox-treinos-lista .valor-dia{
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 140%;
+}
+.prox-treinos-lista .valor-mes{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 140%;
+}
+.prox-treinos-lista .texto-infos-box-treino h4{
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 140%;
+  color: #000;
+  margin-top: 0px;
+  margin-bottom: 4px;
+}
+.prox-treinos-lista .texto-infos-box-treino h5{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+  color: #000;
+  margin: 0px;
+}
+
+
+
+header nav{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  text-align: center;
+  color: #000000;
+  padding-top: 60px;
+}
+.btn-voltar{
+  position: absolute;
+}
+.descricao-treino-sec h3{
+  margin-top: 48px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 140%;
+  color: #000000;
+  margin-bottom: 4px;
+}
+.descricao-treino-sec h6{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+  color: #000000;
+  margin-top: 0px;
+  margin-bottom: 24px;
+}
+.descricao-treino-sec p{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.exercicios-lista h3{
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 140%;
+  color: #000000;
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+.exercicios-lista ul{
+  list-style: none;
+  padding-left: 0px;
+}
+.exercicios-lista li{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  padding: 16px;
+  transition: 0.2s;
+  border: 1px solid #D9D9D9;
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+.exercicios-lista img{
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.exercicios-lista h4{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 140%;
+  margin-top: 0px;
+  margin-bottom: 4px;
+  color: #000000;
+}
+.exercicios-lista h5{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 140%;
+  color: #000000;
+  margin-bottom: 0px;
+}
+.exercicios-lista a{
+  cursor: pointer;
+  transition: 0.2s;
+  text-decoration: none;
+}
+.exercicios-lista a:hover li{
+  transition: 0.2s;
+  box-shadow: 0px 4px 15px rgb(0 0 0 / 16%);
+}
+
+
+
+.detalhe-exercicio-sec{
+  margin-top: 56px;
+}
+.detalhe-exercicio-sec{
+  text-align: center;
+}
+.detalhe-exercicio-sec img{
+  width: 100%;
+  max-width: 300px;
+  height: 300px;
+  object-fit: cover;
+  margin: auto;
+  border-radius: 24px;
+}
+.detalhe-exercicio-sec h3{
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 140%;
+  text-align: center;
+  color: #000000;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+.detalhe-exercicio-sec p{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+  text-align: center;
+  color: #000000;
+  max-width: 600px;
+  margin: auto;
+}
+
+
+
+.infos-perfil-aluno{
+  margin-top: 56px;
+}
+.infos-perfil-aluno h3{
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+  color: #342425;
+  margin-top: 0px;
+  margin-bottom: 7px;
+}
+.infos-perfil-aluno{
+  text-align: center;
+}
+.infos-perfil-aluno .btn-editar-perfil{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #342425;
+  display: block;
+  text-decoration: none;
+  margin-top: 30px;
+}
+.infos-perfil-aluno .btn-editar-perfil:hover{
+  text-decoration: underline;
+}
+.infos-perfil-aluno .btn-logout{
+  display: inline-block;
+  width: 100%;
+  padding: 18px 0px;
+  background-color: #ebbe31;
+  color: #fff;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  border: 0px;
+  line-height: 140%;
+  transition: 0.2s;
+  border-radius: 16px;
+  text-decoration: none;
+  max-width: 300px;
+  margin-top: 30px;
+}
+.infos-perfil-aluno .btn-logout:hover{
+  transition: 0.2s;
+  opacity: 0.8;
+}
+.infos-perfil-aluno hr{
+  margin: 40px 0px;
+}
+
+
+
+.box-edicao-informacoes{
+  max-width: 400px;
+  width: 100%;
+  margin: auto;
+  margin-top: 56px;
+}
+.box-edicao-informacoes .btn-update{
+  display: inline-block;
+  width: 100%;
+  padding: 18px 0px;
+  background-color: #132356;
+  color: #fff;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  border: 0px;
+  line-height: 140%;
+  margin-top: 20px;
+  transition: 0.2s;
+  border-radius: 16px;
+}
+.box-edicao-informacoes .btn-update:hover{
+  transition: 0.2s;
+  opacity: 0.8;
+}
+.box-edicao-informacoes input{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 140%;
+  color: #000000;
+  border: 0px;
+  padding-bottom: 14px;
+  padding-top: 14px;
+  margin-bottom: 40px;
+  border-radius: 0px;
+  border-bottom: 1px solid rgba(0,0,0,.3);
+}
