@@ -94,13 +94,13 @@ const makeRequestEditUser = async () => {
 makeRequestGetTreinos = async () => {
     const url = '/fichatreino?id=' + 2;
     const fichas = await makeRequestGet(url);
-    if(!fichas) return;
-    
+    if (!fichas) return;
+
     const ficha = fichas.pop();
     const treinos = [ficha.treinoA, ficha.treinoB, ficha.treinoC];
 
     if (!treinos) return;
-    
+
     for (let [i, treino] of treinos.entries()) {
         if (!treino) continue;
 
@@ -127,6 +127,57 @@ makeRequestGetTreinos = async () => {
         elementTag.innerHTML = element
         document.getElementById("list-treinos").append(elementTag);
     }
+}
+
+const makeRequestGetDetalhesTreino = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tipoTreino = urlParams.get('type');
+    const idTreino = urlParams.get('treino');
+    document.getElementById("nome-treino").innerText = "Treino " + tipoTreino;
+
+    let exerciciosList = await makeRequestGet('/rltreinoexercico?treino=' + idTreino);
+    if (!exerciciosList) return;
+    document.getElementById("qtde-exercicios").innerText = exerciciosList.length + " exercícios";
+    console.log(exerciciosList);
+
+    for (const exercicios of exerciciosList) {
+        const exercicio = exercicios.exercicio;
+        if (!exercicio) continue;
+
+        let elementTag = document.createElement("a");
+        elementTag.href = '/workouthelper/detalhe-do-exercicio.html?id=' + exercicio.id;
+
+        const element =
+            `<li>
+                <div>
+                    <img src="header-musculacao-bt.png" alt="Img Musculação">
+                </div>
+                <div>
+                    <h4>${exercicio.nome}</h4>
+                    <h5>${exercicio.descricao}</h5>
+                </div>
+                <div>
+                    <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.41985 11L6 6L1.41985 1" stroke="black" stroke-width="1.5"/>
+                    </svg>
+                </div>
+            </li>`;
+
+        elementTag.innerHTML = element
+        document.getElementById("list-exercicios").append(elementTag);
+    }
+}
+
+const makeRequestGetExercicios = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    let exercicio = await makeRequestGet('/exercicio/' + id);
+    console.log(exercicio);
+    if (!exercicio) return;
+    
+    document.getElementById("nome-exercicio").innerText = exercicio.nome;
+    document.getElementById("descricao-exercicio").innerText = exercicio.descricao;
+    document.getElementById("recomendacao").innerText = "Recomendação: " + exercicio.recomendacao;
 }
 
 const init = () => {
