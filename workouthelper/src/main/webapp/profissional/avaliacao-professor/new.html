@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link href="../../index.css" rel="stylesheet" >
+
+    <title>Workout Helper</title>
+  </head>
+  <body>
+
+    <header class="home-logotipo header-profissional">
+        <div class="container">
+            <div class="menu-navegacao-index">
+                <div class="logotipo-branca">
+                    Workout
+                    <strong>Helper</strong>
+                </div>
+                <div class="meu-perfil">
+                    <a href="../avaliacao-professor/index.html">Avaliações</a>
+                    <a href="../exercicios/index.html">Exercícios</a>
+                    <a href="../treinos/index.html">Treinos</a>
+                    <a href="../fichas/index.html">Fichas</a>
+                    <a href="perfil.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="table-section-new">
+        <div class="container">
+            <a class="btn-goback" href="index.html">Voltar</a>
+            <form>
+                <div class="form-group">
+                    <select class="form-control" id="select-aluno-form">
+                        <option value="" disabled selected hidden>Selecione um Aluno:</option>
+                        <option>Rodolfo</option>
+                        <option>Caio</option>
+                        <option>Juliete</option>
+                        <option>Fiuk</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <input type="date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Altura:" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Largura do Braço:" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Largura da Coxa:" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Largura da Cintura:" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Largura da Peito:" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Percentual de Gordura:" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Peso:" required>
+                </div>
+                <button type="submit" class="btn-update">Cadastrar</button>
+            </form>
+
+        </div>
+    </section>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script src="../../index.js"></script>
+
+    <script>
+        $('select').selectpicker();
+    </script>
+</body>
+</html>
