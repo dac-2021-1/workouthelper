@@ -6,6 +6,8 @@
 package service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,9 +19,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.Avaliacao;
+import model.RlTreinoExercico;
 
 /**
  *
@@ -67,10 +71,17 @@ public class AvaliacaoFacadeREST extends AbstractFacade<Avaliacao> {
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Avaliacao> findAll() {
-        return super.findAll();
+    public List<Avaliacao> findAll(@QueryParam("aluno") Integer id) {
+        List<Avaliacao> lista = super.findAll();
+       if(id != null){
+            List<Avaliacao> filtered = lista.stream()
+                    .filter(li -> Objects.equals(li.getIdAluno().getId(), id))
+                    .collect(Collectors.toList());
+            return filtered;
+        }
+        return lista;
+
     }
 
     @GET

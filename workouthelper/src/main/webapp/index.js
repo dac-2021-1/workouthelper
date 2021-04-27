@@ -34,7 +34,7 @@ const makeRequestLogin = () => {
         localStorage.setItem("name", result.name)
         localStorage.setItem("id", result.id)
         localStorage.setItem("isAluno", result.isAluno)
-        window.location.href = '/workouthelper/';
+        window.location.href = result.isAluno ? '/workouthelper/' : '/workouthelper/profissional/fichas/index.html';
     }).catch(e => {
         console.log(e);
         alert("Erro ao fazer login");
@@ -174,10 +174,32 @@ const makeRequestGetExercicios = async () => {
     let exercicio = await makeRequestGet('/exercicio/' + id);
     console.log(exercicio);
     if (!exercicio) return;
-    
+
     document.getElementById("nome-exercicio").innerText = exercicio.nome;
     document.getElementById("descricao-exercicio").innerText = exercicio.descricao;
     document.getElementById("recomendacao").innerText = "Recomendação: " + exercicio.recomendacao;
+}
+
+const makeRequestGetAvaliacao = async () => {
+    let avaliacoes = await makeRequestGet('/avaliacao?aluno=' + localStorage.getItem("id"));
+    console.log(avaliacoes)
+    if (!avaliacoes) return;
+
+    for (const avaliacao of avaliacoes) {
+        let elementTag = document.createElement("tr");
+        let medidas = avaliacao.medidas.explode(';');
+        const element = `
+            <td>${avaliacao.dataAvaliacao}</td>
+            <td>${medidas[0]}cm</td>
+            <td>${medidas[1]}cm</td>
+            <td>${medidas[2]}cm</td>
+            <td>${medidas[3]}cm</td>
+            <td>${medidas[4]}%</td>
+            <td>${avaliacao.peso}</td>
+        `;
+        elementTag.innerHTML = element;
+        document.getElementById("tabela-avaliacoes").append(elementTag);
+    }
 }
 
 const init = () => {
