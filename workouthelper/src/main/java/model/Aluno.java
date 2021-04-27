@@ -70,6 +70,7 @@ public class Aluno implements Serializable {
     private Plano idPlano;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     @OneToOne(optional = true)
+    @JsonbTransient
     private Usuario usuario;
 
     public Aluno() {

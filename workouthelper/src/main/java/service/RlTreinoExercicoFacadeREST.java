@@ -6,6 +6,8 @@
 package service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +19,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
 import javax.ws.rs.core.Response;
@@ -98,10 +101,16 @@ public class RlTreinoExercicoFacadeREST extends AbstractFacade<RlTreinoExercico>
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_JSON})
-    public List<RlTreinoExercico> findAll() {
-        return super.findAll();
+    public List<RlTreinoExercico> findAll(@QueryParam("treino") Integer idTreino) {
+        List<RlTreinoExercico> lista = super.findAll();
+        if(idTreino != null){
+            List<RlTreinoExercico> filtered = lista.stream()
+                    .filter(li -> Objects.equals(li.getRlTreinoExercicoPK().getIdTreino(), idTreino))
+                    .collect(Collectors.toList());
+            return filtered;
+        }
+        return lista;
     }
 
     @GET

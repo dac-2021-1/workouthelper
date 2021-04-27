@@ -29,59 +29,17 @@
     </section>
 
     <section class="secao-treino-inicio">
-        <div class="container">
-            <h2>Treino de hoje</h2>
-            <a href="#">
-                <div class="box-treino-de-hoje">
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="date-box-treino">
-                                <div class="valor-dia">26</div>
-                                <div class="valor-mes">OUT</div>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <div class="texto-infos-box-treino">
-                                <h4>Nome do Treino</h4>
-                                <h5>07 exercícios</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
+        <div class="container" id="list-treinos">
+            <h2>Treinos da sua ficha</h2>
         </div>
     </section>
 
-    <section class="prox-treinos-lista">
-        <div class="container">
-            <h3>Próximos Treinos</h3>
-            <ul>
-                <a href="detalhe-do-treino.html">
-                    <li>
-                        <div class="date-box-treino">
-                            <div class="valor-dia">26</div>
-                            <div class="valor-mes">OUT</div>
-                        </div>
-                        <div class="texto-infos-box-treino">
-                            <h4>Nome do Treino</h4>
-                            <h5>07 exercícios</h5>
-                        </div>
-                        <div>
-                            <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1.41985 11L6 6L1.41985 1" stroke="black" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-                    </li>
-                </a>
-            </ul>
-        </div>
-    </section>
-    
-
-
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="index.js"></script>
+    <script>
+        const isAluno = localStorage.getItem('isAluno');
+        if(isAluno) makeRequestGetTreinos();
+    </script>
 </body>
 </html>
