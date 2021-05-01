@@ -53,11 +53,16 @@ public class LoginFacadeREST extends AbstractFacade<Usuario> {
                 JSONObject jo = new JSONObject();
                 jo.put("cpf", u.getCpf());
                 jo.put("name", u.getNome());
-                jo.put("id", u.getId());
                 jo.put("token", jwtToken);
-                if(u.getAluno() != null) jo.put("isAluno", true);
-                else jo.put("isAluno", false);
-                
+                jo.put("idUsuario", u.getId());
+                if (u.getAluno() != null) {
+                    jo.put("id", u.getAluno().getId());
+                    jo.put("isAluno", true);
+                } else {
+                    jo.put("isAluno", false);
+                    jo.put("id", u.getProfessor().getId());
+                }
+                System.out.println("service.LoginFacadeREST.login() " + jo.toString());
                 return Response.status(Response.Status.OK).entity(jo.toString()).build();
             } else {
                 return Response.status(Response.Status.UNAUTHORIZED)

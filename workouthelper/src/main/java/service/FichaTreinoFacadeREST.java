@@ -71,13 +71,17 @@ public class FichaTreinoFacadeREST extends AbstractFacade<FichaTreino> {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public List<FichaTreino> findAll(@QueryParam("id") Integer id) {
+    public List<FichaTreino> findAll(@QueryParam("aluno") Integer alunoId, @QueryParam("professor") Integer professorId) {
         List<FichaTreino> lista = super.findAll();
-        if (id != null) {
-            List<FichaTreino> filtered = lista.stream()
-                    .filter(li -> Objects.equals(li.getIdAluno().getId(), id))
+        if (alunoId != null) {
+            return lista.stream()
+                    .filter(li -> Objects.equals(li.getIdAluno().getId(), alunoId))
                     .collect(Collectors.toList());
-            return filtered;
+        }
+        if (professorId != null) {
+            return lista.stream()
+                    .filter(li -> Objects.equals(li.getIdProfessor().getId(), professorId))
+                    .collect(Collectors.toList());
         }
         return lista;
     }

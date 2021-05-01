@@ -27,7 +27,7 @@
                     <a href="../exercicios/index.html">Exercícios</a>
                     <a href="../treinos/index.html">Treinos</a>
                     <a href="../fichas/index.html">Fichas</a>
-                    <a href="perfil.html">Logout</a>
+                    <a href="#" onclick="logout()">Logout</a>
                 </div>
             </div>
         </div>
@@ -36,39 +36,35 @@
     <section class="table-section-new">
         <div class="container">
             <a class="btn-goback" href="index.html">Voltar</a>
-            <form>
+            <form method="POST" onsubmit="makeRequestCreateAvaliacao();return false">
                 <div class="form-group">
-                    <select class="form-control" id="select-aluno-form">
+                    <select class="form-control" name="aluno" id="select-aluno-form">
                         <option value="" disabled selected hidden>Selecione um Aluno:</option>
-                        <option>Rodolfo</option>
-                        <option>Caio</option>
-                        <option>Juliete</option>
-                        <option>Fiuk</option>
                     </select>
                 </div>
                 <div class="form-group">
-                  <input type="date" class="form-control" required>
+                  <input type="date" class="form-control" name="data" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Altura:" required>
+                    <input type="text" class="form-control" placeholder="Altura:" name="medidas" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Largura do Braço:" required>
+                    <input type="text" class="form-control" placeholder="Largura do Braço:" name="medidas" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Largura da Coxa:" required>
+                    <input type="text" class="form-control" placeholder="Largura da Coxa:" name="medidas" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Largura da Cintura:" required>
+                    <input type="text" class="form-control" placeholder="Largura da Cintura:" name="medidas" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Largura da Peito:" required>
+                    <input type="text" class="form-control" placeholder="Largura da Peito:" name="medidas" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Percentual de Gordura:" required>
+                    <input type="text" class="form-control" placeholder="Percentual de Gordura:" name="medidas" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Peso:" required>
+                    <input type="text" class="form-control" placeholder="Peso:" name="peso" required>
                 </div>
                 <button type="submit" class="btn-update">Cadastrar</button>
             </form>
@@ -80,9 +76,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <script src="../../index.js"></script>
-
     <script>
-        $('select').selectpicker();
+        makeRequestGetAlunos();
     </script>
 </body>
 </html>

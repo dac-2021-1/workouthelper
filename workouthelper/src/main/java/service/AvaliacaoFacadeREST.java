@@ -72,13 +72,17 @@ public class AvaliacaoFacadeREST extends AbstractFacade<Avaliacao> {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Avaliacao> findAll(@QueryParam("aluno") Integer id) {
+    public List<Avaliacao> findAll(@QueryParam("aluno") Integer alunoId, @QueryParam("professor") Integer professorId) {
         List<Avaliacao> lista = super.findAll();
-       if(id != null){
-            List<Avaliacao> filtered = lista.stream()
-                    .filter(li -> Objects.equals(li.getIdAluno().getId(), id))
+       if(alunoId != null){
+            return lista.stream()
+                    .filter(li -> Objects.equals(li.getIdAluno().getId(), alunoId))
                     .collect(Collectors.toList());
-            return filtered;
+        }
+       if(professorId != null){
+            return lista.stream()
+                    .filter(li -> Objects.equals(li.getIdProfessor().getId(), professorId))
+                    .collect(Collectors.toList());
         }
         return lista;
 

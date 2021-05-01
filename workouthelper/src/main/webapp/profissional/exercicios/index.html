@@ -26,7 +26,7 @@
                     <a href="../exercicios/index.html">Exercícios</a>
                     <a href="../treinos/index.html">Treinos</a>
                     <a href="../fichas/index.html">Fichas</a>
-                    <a href="perfil.html">Logout</a>
+                    <a href="#" onclick="logout()">Logout</a>
                 </div>
             </div>
         </div>
@@ -57,25 +57,7 @@
                         <th scope="col">Recomendação</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>Pullback Vertical</td>
-                        <td>Exercício bom para as costas!</td>
-                        <td>https://www.youtube.com/watch?v=wHb_2EAWsLg</td>
-                        <td>Recomendado para maiores de 25 anos.</td>
-                    </tr>
-                    <tr>
-                        <td>Pullback Vertical</td>
-                        <td>Exercício bom para as costas!</td>
-                        <td>https://www.youtube.com/watch?v=wHb_2EAWsLg</td>
-                        <td>Recomendado para maiores de 25 anos.</td>
-                    </tr>
-                    <tr>
-                        <td>Pullback Vertical</td>
-                        <td>Exercício bom para as costas!</td>
-                        <td>https://www.youtube.com/watch?v=wHb_2EAWsLg</td>
-                        <td>Recomendado para maiores de 25 anos.</td>
-                    </tr>
+                    <tbody id="tabela-exercicios">
                     </tbody>
                 </table>
             </div>
@@ -85,5 +67,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="../../index.js"></script>
+    <script>
+        makeRequestGetExerciciosProfessor();
+    </script>
 </body>
 </html>

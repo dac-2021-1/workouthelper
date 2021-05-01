@@ -27,7 +27,7 @@
                     <a href="../exercicios/index.html">Exercícios</a>
                     <a href="../treinos/index.html">Treinos</a>
                     <a href="../fichas/index.html">Fichas</a>
-                    <a href="perfil.html">Logout</a>
+                    <a href="#" onclick="logout()">Logout</a>
                 </div>
             </div>
         </div>
@@ -36,47 +36,31 @@
     <section class="table-section-new">
         <div class="container">
             <a class="btn-goback" href="index.html">Voltar</a>
-            <form>
+            <form method="POST" onsubmit="makeRequestCreateFichas();return false;">
                 <div class="form-group">
-                    <select class="form-control" id="select-aluno-form">
+                    <select class="form-control" name="idAluno" id="select-aluno-form">
                         <option value="" disabled selected hidden>Selecione um Aluno:</option>
-                        <option>Rodolfo</option>
-                        <option>Caio</option>
-                        <option>Juliete</option>
-                        <option>Fiuk</option>
                     </select>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" onfocus="(this.type='date')" placeholder="Selecione a data de início:" required>
+                  <input type="text" class="form-control" name="dataInicio" onfocus="(this.type='date')" placeholder="Selecione a data de início:" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" onfocus="(this.type='date')" placeholder="Selecione a data de fim:" required>
+                    <input type="text" class="form-control" name="dataFinal" onfocus="(this.type='date')" placeholder="Selecione a data de fim:" required>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" id="select-aluno-form">
+                    <select class="form-control" name="treinoA" id="select-treinoA-form">
                         <option value="" disabled selected hidden>Treino A:</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" id="select-aluno-form">
+                    <select class="form-control" name="treinoB" id="select-treinoB-form">
                         <option value="" disabled selected hidden>Treino B:</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" id="select-aluno-form">
+                    <select class="form-control" name="treinoC" id="select-treinoC-form">
                         <option value="" disabled selected hidden>Treino C:</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
                     </select>
                 </div>
                 <button type="submit" class="btn-update">Cadastrar</button>
@@ -91,7 +75,8 @@
     <script src="../../index.js"></script>
 
     <script>
-        $('select').selectpicker();
+        makeRequestGetTreinosToFicha();
+        makeRequestGetAlunos();
     </script>
 </body>
 </html>
