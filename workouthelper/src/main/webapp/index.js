@@ -303,7 +303,7 @@ const makeRequestGetAlunos = async () => {
         elementTag.setAttribute("value", aluno.aluno.id);
         document.getElementById("select-aluno-form").append(elementTag);
     }
-    $('select').selectpicker();
+    //$('select').selectpicker();
 }
 
 const makeRequestGetExerciciosToTreino = async () => {
@@ -318,7 +318,7 @@ const makeRequestGetExerciciosToTreino = async () => {
         console.log(elementTag);
         document.getElementById("select-exercicio-form").append(elementTag);
     }
-    $('select').selectpicker();
+    //$('select').selectpicker();
 }
 
 const makeRequestGetTreinosToFicha = async () => {
