@@ -93,6 +93,7 @@ public abstract class AbstractFacade<T> {
         } else {
             try {
                 getEntityManager().merge(entity);
+                getEntityManager().detach(entity);
                 return Response.ok(entity).build();
             } catch (Exception e) {
                 return Response.serverError().build();
